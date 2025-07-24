@@ -27,6 +27,13 @@
       padding: 1rem;
     }
   </style>
+  <script>
+    // Protección por contraseña
+    var password = prompt("🔐 Ingrese la contraseña para acceder:");
+    if(password !== "transformacion2025") {
+      document.write("<h2>⛔ Acceso denegado</h2><p>Contraseña incorrecta.</p>");
+    }
+  </script>
 </head>
 <body>
   <h1>☕ Post de LinkedIn: Café con José Nagahata</h1>
