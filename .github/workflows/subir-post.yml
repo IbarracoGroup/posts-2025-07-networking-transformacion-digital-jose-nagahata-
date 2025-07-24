@@ -1,21 +1,22 @@
-name: Subir revisión de post
+name: 📥 Subir revisión automática
 
 on:
-  workflow_dispatch:  # Este workflow se ejecuta manualmente
+  repository_dispatch:
+    types: [guardar_revision]
 
 jobs:
   subir-post:
     runs-on: ubuntu-latest
     steps:
-      - name: Clonar el repositorio
+      - name: 🔄 Clonar el repositorio
         uses: actions/checkout@v3
 
-      - name: Crear archivo desde texto
+      - name: 📝 Crear archivo desde contenido enviado
         run: |
-          echo "${{ secrets.REVISION_CONTENIDO }}" > revision-jose.txt
+          echo "${{ github.event.client_payload.texto }}" > revision-jose-${{ github.run_number }}.txt
 
-      - name: Subir archivo al repositorio
+      - name: 🚀 Subir archivo al repositorio
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "✅ Revisión de José subida automáticamente"
-          file_pattern: revision-jose.txt
+          commit_message: "✅ Revisión automática de José"
+          file_pattern: revision-jose-*.txt
