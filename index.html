@@ -11,6 +11,7 @@
       padding: 2rem;
       line-height: 1.6;
       background-color: #f9f9f9;
+      display: none; /* Oculta todo por defecto */
     }
     h1 { color: #333; }
     img {
@@ -29,9 +30,15 @@
   </style>
   <script>
     // Protección por contraseña
-    var password = prompt("🔐 Ingrese la contraseña para acceder:");
-    if(password !== "transformacion2025") {
-      document.write("<h2>⛔ Acceso denegado</h2><p>Contraseña incorrecta.</p>");
+    const accesoPermitido = prompt("🔐 Ingrese la contraseña para acceder:");
+    const claveCorrecta = "transformacion2025";
+
+    if (accesoPermitido === claveCorrecta) {
+      document.addEventListener("DOMContentLoaded", function() {
+        document.body.style.display = "block"; // Muestra el contenido
+      });
+    } else {
+      document.write("<h2 style='text-align:center;margin-top:100px;'>⛔ Acceso denegado</h2><p style='text-align:center;'>Contraseña incorrecta o cancelada.</p>");
     }
   </script>
 </head>
