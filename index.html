@@ -1,105 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Post de LinkedIn - José Nagahata</title>
+  <meta charset="UTF-8" />
+  <title>✏️ Revisión de Post</title>
   <style>
     body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       max-width: 800px;
       margin: auto;
       padding: 2rem;
-      background-color: #f4f6f8;
+      background-color: #f4f4f4;
       display: none;
     }
-
-    h1 {
-      color: #1a1a1a;
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1rem;
-      color: #333;
-    }
-
+    h1 { color: #333; }
     textarea {
       width: 100%;
-      height: 380px;
-      margin-top: 1rem;
-      font-family: inherit;
-      font-size: 1rem;
+      height: 400px;
       padding: 1rem;
-      border: 1px solid #ccc;
+      font-size: 1rem;
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-      background-color: #fff;
-      transition: box-shadow 0.2s ease-in-out;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
-    textarea:focus {
-      outline: none;
-      border-color: #0066cc;
-      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #0066cc;
+    button {
+      margin-top: 1rem;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #0070f3;
       color: #fff;
       border: none;
       border-radius: 8px;
-      font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     }
-
-    .btn:hover {
-      background-color: #004da1;
-    }
-
-    .success-msg {
+    .mensaje {
       margin-top: 1rem;
-      color: #2e7d32;
       font-weight: bold;
-      display: none;
-    }
-
-    img {
-      margin-top: 2rem;
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      color: green;
     }
   </style>
-  <script>
-    const accesoPermitido = prompt("🔐 Ingrese la contraseña para acceder:");
-    const claveCorrecta = "transformacion2025";
-
-    if (accesoPermitido === claveCorrecta) {
-      document.addEventListener("DOMContentLoaded", () => {
-        document.body.style.display = "block";
-      });
-    } else {
-      document.write("<h2 style='text-align:center;margin-top:100px;'>⛔ Acceso denegado</h2><p style='text-align:center;'>Contraseña incorrecta o cancelada.</p>");
-    }
-
-    function guardarCambios() {
-      const texto = document.getElementById("postTexto").value;
-      localStorage.setItem("borradorPostJose", texto);
-      document.getElementById("mensajeExito").style.display = "block";
-    }
-  </script>
 </head>
 <body>
   <h1>☕ Post de LinkedIn: Café con José Nagahata</h1>
-
   <p>Texto editable del post:</p>
-  <textarea id="postTexto">
+  <textarea id="contenido">
 ☕ Cuando una conversación redefine tu perspectiva sobre transformación organizacional
 
 Hoy tuve el privilegio de compartir café y conocimientos con José Nagahata, un líder cuya experiencia en datos, procesos y tecnología ofrece una perspectiva única sobre el cambio organizacional real.
@@ -123,13 +66,44 @@ Gracias, José, por compartir tu experiencia y perspectiva.
 
 #TransformaciónDigital #Liderazgo #DatosProcesos #NetworkingEstratégico #InteligenciaArtificial #Automatización #GestiónDelCambio
   </textarea>
+  <br>
+  <button onclick="enviarRevision()">✅ Guardar y enviar revisión</button>
+  <p class="mensaje" id="msg"></p>
 
-  <button class="btn" onclick="guardarCambios()">✅ Guardar cambios</button>
-  <p id="mensajeExito" class="success-msg">✔️ Cambios guardados correctamente (localmente)</p>
+  <script>
+    const clave = prompt("🔐 Ingresa la contraseña para acceder:");
+    if (clave !== "transformacion2025") {
+      document.write("<h2>⛔ Acceso denegado</h2>");
+    } else {
+      document.body.style.display = "block";
+    }
 
-  <h2>Imagen del post:</h2>
-  <img src="post-jose-nagahata.jpg" alt="Imagen del post">
+    async function enviarRevision() {
+      const contenido = document.getElementById("contenido").value;
+      const msg = document.getElementById("msg");
 
-  <p>✉️ Puedes editar el texto anterior directamente. Al hacer clic en "Guardar cambios", se guardará en tu navegador (localmente).</p>
+      const respuesta = await fetch("https://api.github.com/repos/IbarracoGroup/posts-2025-07-networking-transformacion-digital-jose-nagahata-/dispatches", {
+        method: "POST",
+        headers: {
+          "Accept": "application/vnd.github+json",
+          "Authorization": "Bearer GH_PAT",  // NO pongas tu token aquí, GitHub Pages no puede hacer esto directamente
+          "X-GitHub-Api-Version": "2022-11-28"
+        },
+        body: JSON.stringify({
+          event_type: "guardar_revision",
+          client_payload: {
+            texto: contenido
+          }
+        })
+      });
+
+      if (respuesta.ok) {
+        msg.innerText = "✔️ Revisión enviada. Se actualizará en GitHub Actions.";
+      } else {
+        msg.innerText = "❌ Hubo un error al enviar la revisión.";
+        console.error(await respuesta.text());
+      }
+    }
+  </script>
 </body>
 </html>
