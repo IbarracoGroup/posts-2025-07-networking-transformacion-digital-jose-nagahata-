@@ -1,47 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>✏️ Revisión de Post</title>
+  <meta charset="UTF-8">
+  <title>Post editable – José</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
-      background-color: #f4f4f4;
-      display: none;
-    }
-    h1 { color: #333; }
-    textarea {
-      width: 100%;
-      height: 400px;
-      padding: 1rem;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    button {
-      margin-top: 1rem;
-      padding: 10px 20px;
-      font-size: 1rem;
-      background-color: #0070f3;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .mensaje {
-      margin-top: 1rem;
-      font-weight: bold;
-      color: green;
-    }
+    body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f4f4f4; display: none; }
+    textarea { width: 100%; height: 400px; padding: 1rem; font-size: 1rem; margin-top: 1rem; }
+    button { margin-top: 1rem; padding: 10px 20px; background: #0070f3; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .mensaje { margin-top: 1rem; font-weight: bold; color: green; }
   </style>
 </head>
 <body>
-  <h1>☕ Post de LinkedIn: Café con José Nagahata</h1>
-  <p>Texto editable del post:</p>
+  <h1>☕ Revisión de Post: Café con José Nagahata</h1>
   <textarea id="contenido">
 ☕ Cuando una conversación redefine tu perspectiva sobre transformación organizacional
 
@@ -64,44 +34,41 @@ Gracias, José, por compartir tu experiencia y perspectiva.
 
 👉 ¿Cuál ha sido tu conversación más transformadora de este año?
 
-#TransformaciónDigital #Liderazgo #DatosProcesos #NetworkingEstratégico #InteligenciaArtificial #Automatización #GestiónDelCambio
+#TransformaciónDigital #Liderazgo #DatosProcesos #NetworkingEstratégico #InteligenciaArtificial #Automatización #GestiónDelCambio #Liderazgo
   </textarea>
-  <br>
-  <button onclick="enviarRevision()">✅ Guardar y enviar revisión</button>
+  <button onclick="guardarYEnviar()">✅ Guardar y enviar revisión</button>
   <p class="mensaje" id="msg"></p>
 
   <script>
-    const clave = prompt("🔐 Ingresa la contraseña para acceder:");
+    const clave = prompt("🔐 Ingresa la contraseña:");
     if (clave !== "transformacion2025") {
       document.write("<h2>⛔ Acceso denegado</h2>");
     } else {
       document.body.style.display = "block";
     }
 
-    async function enviarRevision() {
+    async function guardarYEnviar() {
       const contenido = document.getElementById("contenido").value;
       const msg = document.getElementById("msg");
 
-      const respuesta = await fetch("https://api.github.com/repos/IbarracoGroup/posts-2025-07-networking-transformacion-digital-jose-nagahata-/dispatches", {
+      const response = await fetch("https://api.github.com/repos/IbarracoGroup/posts-2025-07-networking-transformacion-digital-jose-nagahata-/dispatches", {
         method: "POST",
         headers: {
           "Accept": "application/vnd.github+json",
-          "Authorization": "Bearer GH_PAT",  // NO pongas tu token aquí, GitHub Pages no puede hacer esto directamente
+          "Authorization": "Bearer GH_PAT",  // 👈 Aquí reemplaza por tu verdadero secreto (solo si pruebas en local)
           "X-GitHub-Api-Version": "2022-11-28"
         },
         body: JSON.stringify({
           event_type: "guardar_revision",
-          client_payload: {
-            texto: contenido
-          }
+          client_payload: { texto: contenido }
         })
       });
 
-      if (respuesta.ok) {
-        msg.innerText = "✔️ Revisión enviada. Se actualizará en GitHub Actions.";
+      if (response.ok) {
+        msg.innerText = "✔️ Revisión enviada correctamente a GitHub. Se generará un archivo .txt automático.";
       } else {
-        msg.innerText = "❌ Hubo un error al enviar la revisión.";
-        console.error(await respuesta.text());
+        msg.innerText = "❌ Error al enviar a GitHub. Consulta consola.";
+        console.error(await response.text());
       }
     }
   </script>
