@@ -3,7 +3,12 @@ name: 📥 Subir revisión automática
 on:
   repository_dispatch:
     types: [guardar_revision]
-  workflow_dispatch:  # ✅ Esto habilita el disparo manual/API
+  workflow_dispatch:
+    inputs:
+      texto:          # ✅ Declaración del input esperado
+        description: 'Texto del post'
+        required: false
+        default: ''
 
 jobs:
   subir-post:
@@ -14,7 +19,7 @@ jobs:
 
       - name: 📝 Crear archivo desde contenido enviado
         run: |
-          echo "${{ github.event.client_payload.texto }}" > revision-jose-${{ github.run_number }}.txt
+          echo "${{ github.event.client_payload.texto || github.event.inputs.texto }}" > revision-jose-${{ github.run_number }}.txt
 
       - name: 🚀 Subir archivo al repositorio
         uses: stefanzweifel/git-auto-commit-action@v5
