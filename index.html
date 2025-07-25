@@ -1,48 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Post editable – José</title>
+  <meta charset="UTF-8" />
+  <title>Revisión de Post – José Nagahata</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f4f4f4; display: none; }
-    textarea { width: 100%; height: 400px; padding: 1rem; font-size: 1rem; margin-top: 1rem; }
-    button { margin-top: 1rem; padding: 10px 20px; background: #0070f3; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    .mensaje { margin-top: 1rem; font-weight: bold; color: green; }
+    :root {
+      --primary: #0070f3;
+      --bg: #f9f9f9;
+      --text: #333;
+      --card-bg: #fff;
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      margin: 0;
+      padding: 2rem;
+      color: var(--text);
+      display: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero {
+      background: var(--primary);
+      color: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .card h2 {
+      margin-top: 0;
+    }
+
+    textarea {
+      width: 100%;
+      height: 500px;
+      font-size: 1rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+      resize: vertical;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #005bd1;
+    }
+
+    .mensaje {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: green;
+    }
+
+    .denegado {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      padding: 2rem;
+    }
   </style>
 </head>
 <body>
-  <h1>☕ Revisión de Post: Café con José Nagahata</h1>
-  <textarea id="contenido">
+  <div class="container">
+    <div class="hero">
+      <h1>☕ Revisión de Post: Café con José Nagahata</h1>
+      <p>Un espacio privado para reflexionar y revisar nuestra conversación sobre transformación organizacional</p>
+    </div>
+
+    <div class="card">
+      <h2>📝 Edita tu versión del post aquí</h2>
+      <textarea id="contenido">
 ☕ Cuando una conversación redefine tu perspectiva sobre transformación organizacional
 
-Hoy tuve el privilegio de compartir café y conocimientos con José Nagahata, un líder cuya experiencia en datos, procesos y tecnología ofrece una perspectiva única sobre el cambio organizacional real.
+Esta mañana tuve el privilegio de compartir café con José Nagahata, cuya experiencia en datos, procesos y tecnología me dejó reflexiones que van mucho más allá de lo técnico.
 
-💡 El insight central que transformó mi visión: La verdadera transformación no reside en herramientas aisladas, sino en la sinergia entre Procesos + Tecnología + Personas.
+💡 La ecuación que cambió mi perspectiva:
+Transformación exitosa = Procesos + Tecnología + Personas (en ese orden de importancia)
 
-🎯 Los aprendizajes que marcan la diferencia:
+🎯 Los insights que más impacto generaron:
 
-- RPA y Machine Learning sin estrategia clara equivalen a inversión perdida
-- Las matrices de priorización son fundamentales para evitar automatizar la ineficiencia
-- El dominio del backoffice: invisible pero crítico para el éxito sostenible
-- La cocreación estratégica puede superar metodologías tradicionales cuando se aplica correctamente
+🔸 RPA y Machine Learning sin estrategia clara equivalen a inversión desperdiciada  
+🔸 Las matrices de priorización son fundamentales: nunca automatices el caos
 
-🧠 El momento revelador: comprender que, en la era de la IA, el aprendizaje más profundo sigue siendo profundamente humano y emerge del intercambio genuino entre profesionales.
+🧱 Fundamentos organizacionales:
+🔸 El tracking y dominio del backoffice son invisibles pero críticos para el éxito  
+🔸 La cocreación estructurada puede superar metodologías ágiles tradicionales
 
-Una hora de conversación que genera reflexiones duraderas. Eso es networking con propósito.
+🧠 El momento revelador: entender que en la era de la IA, las conversaciones humanas profundas siguen siendo la fuente más poderosa de aprendizaje y transformación.
 
-Gracias, José, por compartir tu experiencia y perspectiva.
+Gracias José por una conversación genuina donde compartiste no solo conocimiento técnico, sino tu visión estratégica sobre cómo conectar personas, procesos y tecnología para generar valor real. Coincidimos en que los mejores insights emergen cuando dos profesionales se conectan desde la autenticidad, la experiencia y el propósito compartido de transformar organizaciones.
 
-👉 ¿Cuál ha sido tu conversación más transformadora de este año?
+👉 ¿Has vivido alguna conversación que te haya cambiado la perspectiva sobre tu industria? Me encantaría conocer tu experiencia.
 
-#TransformaciónDigital #Liderazgo #DatosProcesos #NetworkingEstratégico #InteligenciaArtificial #Automatización #GestiónDelCambio #Liderazgo
-  </textarea>
-  <button onclick="guardarYEnviar()">✅ Guardar y enviar revisión</button>
-  <p class="mensaje" id="msg"></p>
+#TransformaciónDigital #Liderazgo #Procesos #Datos #NetworkingConPropósito #InteligenciaArtificial #Automatización #RPA #MachineLearning #DesarrolloOrganizacional
+      </textarea>
+      <button onclick="guardarYEnviar()">✅ Guardar y enviar revisión</button>
+      <p class="mensaje" id="msg"></p>
+    </div>
+  </div>
 
   <script>
-    const clave = prompt("🔐 Ingresa la contraseña:");
+    const clave = prompt("🔐 Ingresa la contraseña para acceder:");
     if (clave !== "transformacion2025") {
-      document.write("<h2>⛔ Acceso denegado</h2>");
+      document.body.innerHTML = "<div class='denegado'>⛔ Acceso denegado. Contraseña incorrecta.</div>";
     } else {
       document.body.style.display = "block";
     }
@@ -57,12 +153,14 @@ Gracias, José, por compartir tu experiencia y perspectiva.
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ texto: contenido })
-        });
+      });
 
       if (response.ok) {
         msg.innerText = "✔️ Revisión enviada correctamente a GitHub. Se generará un archivo .txt automático.";
+        msg.style.color = "green";
       } else {
         msg.innerText = "❌ Error al enviar a GitHub. Consulta consola.";
+        msg.style.color = "red";
         console.error(await response.text());
       }
     }
