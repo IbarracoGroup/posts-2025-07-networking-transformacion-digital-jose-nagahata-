@@ -3,6 +3,7 @@ name: 📥 Subir revisión automática
 on:
   repository_dispatch:
     types: [guardar_revision]
+  workflow_dispatch:  # ✅ Esto habilita el disparo manual/API
 
 jobs:
   subir-post:
