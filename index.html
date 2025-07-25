@@ -2,17 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Revisión de Post – José Nagahata</title>
+  <title>📥 Revisión del Post – José Nagahata</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #0070f3;
-      --bg: #f9f9f9;
+      --bg: #f5f7fa;
       --text: #333;
       --card-bg: #fff;
       --radius: 12px;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     }
 
     body {
@@ -25,23 +25,28 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 960px;
       margin: auto;
     }
 
     .hero {
       background: var(--primary);
       color: white;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .hero h1 {
-      margin: 0;
-      font-size: 2rem;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
     }
 
     .card {
@@ -49,22 +54,25 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 2rem;
-      margin-bottom: 2rem;
     }
 
     .card h2 {
+      font-size: 1.4rem;
       margin-top: 0;
+      margin-bottom: 1rem;
     }
 
     textarea {
       width: 100%;
-      height: 500px;
+      height: 580px;
       font-size: 1rem;
+      line-height: 1.6;
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: var(--radius);
       resize: vertical;
       box-sizing: border-box;
+      background: #fcfcfc;
     }
 
     button {
@@ -74,18 +82,18 @@
       padding: 12px 24px;
       border-radius: var(--radius);
       font-size: 1rem;
+      margin-top: 1.2rem;
       cursor: pointer;
       transition: background 0.3s ease;
     }
 
     button:hover {
-      background: #005bd1;
+      background: #0055c5;
     }
 
     .mensaje {
       margin-top: 1rem;
       font-weight: 600;
-      color: green;
     }
 
     .denegado {
@@ -100,11 +108,11 @@
   <div class="container">
     <div class="hero">
       <h1>☕ Revisión de Post: Café con José Nagahata</h1>
-      <p>Un espacio privado para reflexionar y revisar nuestra conversación sobre transformación organizacional</p>
+      <p>Reflexión privada sobre transformación organizacional, procesos, tecnología y personas</p>
     </div>
 
     <div class="card">
-      <h2>📝 Edita tu versión del post aquí</h2>
+      <h2>✍️ Edita o revisa tu versión del post</h2>
       <textarea id="contenido">
 ☕ Cuando una conversación redefine tu perspectiva sobre transformación organizacional
 
@@ -115,20 +123,26 @@ Transformación exitosa = Procesos + Tecnología + Personas (en ese orden de imp
 
 🎯 Los insights que más impacto generaron:
 
-🔸 RPA y Machine Learning sin estrategia clara equivalen a inversión desperdiciada  
-🔸 Las matrices de priorización son fundamentales: nunca automatices el caos
+🔹 RPA y Machine Learning sin estrategia clara equivalen a inversión desperdiciada  
+🔹 Las matrices de priorización son fundamentales: nunca automatices el caos
 
 🧱 Fundamentos organizacionales:
-🔸 El tracking y dominio del backoffice son invisibles pero críticos para el éxito  
-🔸 La cocreación estructurada puede superar metodologías ágiles tradicionales
+🔹 El tracking y dominio del backoffice son invisibles pero críticos para el éxito  
+🔹 La cocreación estructurada puede superar metodologías ágiles tradicionales
 
-🧠 El momento revelador: entender que en la era de la IA, las conversaciones humanas profundas siguen siendo la fuente más poderosa de aprendizaje y transformación.
+🤖 Sobre el factor humano:
+🔹 La tecnología amplifica capacidades, pero las personas siguen siendo el diferenciador
 
-Gracias José por una conversación genuina donde compartiste no solo conocimiento técnico, sino tu visión estratégica sobre cómo conectar personas, procesos y tecnología para generar valor real. Coincidimos en que los mejores insights emergen cuando dos profesionales se conectan desde la autenticidad, la experiencia y el propósito compartido de transformar organizaciones.
+🧠 El momento revelador:
+Entender que en la era de la IA, las conversaciones humanas profundas siguen siendo la fuente más poderosa de aprendizaje y transformación.
+
+Gracias José por una conversación genuina donde compartiste no solo conocimiento técnico, sino tu visión estratégica sobre cómo conectar personas, procesos y tecnología para generar valor real.
 
 👉 ¿Has vivido alguna conversación que te haya cambiado la perspectiva sobre tu industria? Me encantaría conocer tu experiencia.
 
-#TransformaciónDigital #Liderazgo #Procesos #Datos #NetworkingConPropósito #InteligenciaArtificial #Automatización #RPA #MachineLearning #DesarrolloOrganizacional
+#TransformaciónDigital #Liderazgo #Procesos #Datos  
+#NetworkingConPropósito #InteligenciaArtificial #Automatización  
+#RPA #MachineLearning #DesarrolloOrganizacional
       </textarea>
       <button onclick="guardarYEnviar()">✅ Guardar y enviar revisión</button>
       <p class="mensaje" id="msg"></p>
@@ -156,10 +170,10 @@ Gracias José por una conversación genuina donde compartiste no solo conocimien
       });
 
       if (response.ok) {
-        msg.innerText = "✔️ Revisión enviada correctamente a GitHub. Se generará un archivo .txt automático.";
+        msg.innerText = "✔️ Revisión enviada correctamente a GitHub.";
         msg.style.color = "green";
       } else {
-        msg.innerText = "❌ Error al enviar a GitHub. Consulta consola.";
+        msg.innerText = "❌ Error al enviar a GitHub. Consulta la consola.";
         msg.style.color = "red";
         console.error(await response.text());
       }
